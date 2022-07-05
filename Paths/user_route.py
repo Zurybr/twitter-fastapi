@@ -2,6 +2,7 @@
 from typing import Optional,List
 from enum import Enum
 import json #trabajar con archivos json
+from uuid import uuid4
 
 # pydantic
 from pydantic import  BaseModel, Field
@@ -14,7 +15,7 @@ from fastapi import HTTPException
 
 # # importar los Models
 from Models.user_model import UserBase,UserComplete
-from uuid import uuid4
+
 router = APIRouter()
 
 

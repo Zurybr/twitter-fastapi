@@ -2,6 +2,8 @@
 # python
 from typing import Optional,List
 from enum import Enum
+import json
+from uuid import uuid4
 
 # pydantic
 from pydantic import BaseModel, Field
@@ -26,8 +28,30 @@ router = APIRouter()
     summary='Create a new tweet',
     tags = ['Tweets']
 )
-def create_tweet():
-    pass
+def create_tweet(tweet:Tweet = Body(...)):
+    """
+    Create_tweet: Register an user in the app
+
+    Parameters:
+        -Request body parameter
+            -user:UserComplete
+    
+    Returns a Json with the basic information
+        -user_id: UUID
+        -email: Emailstr
+        -first_name:str
+        -birth_date:date
+    """
+    with open("./Data/tweets.json",'r+',encoding='utf8') as f:
+        result = json.loads(f.read())
+        tweet_dict = tweet.dict() #metodo interno de fastapi body para convertir request body a dictionario
+        tweet_dict['user_id']=str(uuid4())
+        tweet_dict['birth_date']=str(tweet_dict['birth_date'])
+        print(tweet_dict)
+        result.append(tweet_dict)
+        f.seek(0)#moverme al byte 0
+        f.write(json.dumps(result))
+    return(tweet_dict)
 
 
 @router.get(
