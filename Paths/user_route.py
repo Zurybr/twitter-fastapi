@@ -1,9 +1,10 @@
 # python
 from typing import Optional,List
 from enum import Enum
+import json #trabajar con archivos json
 
 # pydantic
-from pydantic import BaseModel, Field
+from pydantic import  BaseModel, Field
 
 # checar los mas importantes para validarlos
 from pydantic import NameEmail, EmailStr
@@ -13,7 +14,7 @@ from fastapi import HTTPException
 
 # # importar los Models
 from Models.user_model import UserBase,UserComplete
-
+from uuid import uuid4
 router = APIRouter()
 
 
@@ -26,8 +27,31 @@ router = APIRouter()
     summary='Register User',
     tags = ['Users']
 )
-def signup():
-    pass
+def signup(user:UserComplete = Body(...)):
+    """
+    SignUp: Register an user in the app
+
+    Parameters:
+        -Request body parameter
+            -user:UserComplete
+    
+    Returns a Json with the basic information
+        -user_id: UUID
+        -email: Emailstr
+        -first_name:str
+        -birth_date:date
+    """
+    with open("./Data/users.json",'r+',encoding='utf8') as f:
+        result = json.loads(f.read())
+        user_dict = user.dict() #metodo interno de fastapi body para convertir request body a dictionario
+        user_dict['user_id']=str(uuid4())
+        user_dict['birth_date']=str(user_dict['birth_date'])
+        print(user_dict)
+        result.append(user_dict)
+        f.seek(0)#moverme al byte 0
+        f.write(json.dumps(result))
+    return(user_dict)
+
 
 
 @router.post(
@@ -49,7 +73,21 @@ def login():
     tags = ['Users']
 )
 def show_all_users():
-    pass
+    """
+    Getall: Show all users
+
+    Parameters:
+        -None
+    
+    Returns a Json with all user in the app
+        -user_id: UUID
+        -email: Emailstr
+        -first_name:str
+        -birth_date:date
+    """
+    with open("./Data/users.json",'r',encoding='utf8') as f:
+        result = json.loads(f.read())
+        return result
 
 
 @router.get(
@@ -61,6 +99,7 @@ def show_all_users():
 )
 def show_user():
     pass
+
 
 @router.delete(
     path =('/users/{user_id}/delete'),
@@ -82,6 +121,3 @@ def delete_user():
 )
 def delete_user():
     pass
-# @router.post(path="/getuser",response_model=Twitter,status_code=status.HTTP_200_OK)
-# def create_person(user: Twitter = Body(...)):
-#     return user

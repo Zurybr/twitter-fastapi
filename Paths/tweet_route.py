@@ -29,6 +29,7 @@ router = APIRouter()
 def create_tweet():
     pass
 
+
 @router.get(
     path =('/Tweets'),
     response_model=List[Tweet], #List viene de Typing
@@ -50,6 +51,7 @@ def show_all_Tweets():
 def show_user():
     pass
 
+
 @router.delete(
     path =('/Tweets/{user_id}/delete'),
     response_model=Tweet,
@@ -70,6 +72,3 @@ def delete_user():
 )
 def delete_user():
     pass
-# @router.post(path="/getuser",response_model=Tweet,status_code=status.HTTP_200_OK)
-# def create_person(user: Tweet = Body(...)):
-#     return user

@@ -6,11 +6,12 @@ from datetime import date
 from pydantic import BaseModel,Field,EmailStr
 
 class UserBase(BaseModel):
-     user_id: UUID = Field(...)
-     email: EmailStr = Field(...)
+     user_id: Optional[UUID] = Field(default=None)
      name:str = Field(...,max_length=50,min_length=1)
      last_name:Optional[str] = Field(max_length=50,min_length=1,default=None)
      birth_date: Optional[date]=Field(default=None)
 
 class UserComplete(UserBase):
-     password:str = Field(...,min_length=8,max_length=40)
+     email:EmailStr =Field(...,example= 'test.test@test.com')
+     password:str = Field(...,min_length=1,max_length=40)
+     
