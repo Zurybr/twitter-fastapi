@@ -13,4 +13,4 @@ class UserBase(BaseModel):
      birth_date: Optional[date]=Field(default=None)
 
 class UserComplete(UserBase):
-     password:str = Field(...,min_length=8)
+     password:str = Field(...,min_length=8,max_length=40)
