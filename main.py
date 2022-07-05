@@ -11,10 +11,15 @@ from pydantic import NameEmail, EmailStr
 from fastapi import Cookie, FastAPI, Body, Form, Header, Query, Path,UploadFile,File,status
 from fastapi import HTTPException
 # # importar los Models
-# from models import Person
+from Models.user_model import UserBase,UserComplete
+from Models.twitter_model import Twitter
 
 app = FastAPI()
 
 @app.get(path='/')
 def home():
     return {'work':'it'}
+
+@app.post(path="/getuser",response_model=UserBase,status_code=status.HTTP_200_OK)
+def create_person(user: UserBase = Body(...)):
+    return user
