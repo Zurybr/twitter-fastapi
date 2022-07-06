@@ -9,6 +9,6 @@ from pydantic import BaseModel,Field
 class Tweet(BaseModel):
      tweet_id:Optional[UUID] = Field(default=None)
      content:str = Field(...,max_length=256,min_length=1)
-     created_at:date = Field(default=datetime.now())
-     update_at:Optional[date] = Field(default=datetime.now())
-     by:UserBase =Field(...)
+     created_at: datetime = Field(default=datetime.now())
+     updated_at: Optional[datetime] = Field(default=None)
+     by: UserBase = Field(...)

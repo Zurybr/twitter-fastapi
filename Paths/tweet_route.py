@@ -45,8 +45,11 @@ def create_tweet(tweet:Tweet = Body(...)):
     with open("./Data/tweets.json",'r+',encoding='utf8') as f:
         result = json.loads(f.read())
         tweet_dict = tweet.dict() #metodo interno de fastapi body para convertir request body a dictionario
-        tweet_dict['user_id']=str(uuid4())
-        tweet_dict['birth_date']=str(tweet_dict['birth_date'])
+        tweet_dict['tweet_id']=str(uuid4())
+        tweet_dict['created_at']=str(tweet_dict['created_at'])
+        tweet_dict['updated_at']=str(tweet_dict['updated_at'])
+        tweet_dict['by']['birth_date']=str(tweet_dict['by']['birth_date'])
+        tweet_dict['by']["user_id"]=str(uuid4())
         print(tweet_dict)
         result.append(tweet_dict)
         f.seek(0)#moverme al byte 0
