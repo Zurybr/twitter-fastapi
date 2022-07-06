@@ -10,5 +10,17 @@
       "last_name": "strgdsfging",
       "birth_date": "2022-07-06"
     }
+  },
+  {
+    "tweet_id": "4369a06b-8755-4e26-b4a8-65260220152b",
+    "content": "string",
+    "created_at": "2022-07-05 19:38:02.619642",
+    "updated_at": "2022-07-06 00:39:49.387000+00:00",
+    "by": {
+      "user_id": "e642dd3d-c7c9-42aa-b355-6af580c1ba84",
+      "name": "string",
+      "last_name": "string",
+      "birth_date": "2022-07-06"
+    }
   }
 ]

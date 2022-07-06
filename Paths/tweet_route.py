@@ -50,7 +50,6 @@ def create_tweet(tweet:Tweet = Body(...)):
         tweet_dict['updated_at']=str(tweet_dict['updated_at'])
         tweet_dict['by']['birth_date']=str(tweet_dict['by']['birth_date'])
         tweet_dict['by']["user_id"]=str(uuid4())
-        print(tweet_dict)
         result.append(tweet_dict)
         f.seek(0)#moverme al byte 0
         f.write(json.dumps(result))
@@ -65,7 +64,22 @@ def create_tweet(tweet:Tweet = Body(...)):
     tags = ['Tweets']
 )
 def show_all_Tweets():
-    pass
+    """
+    Getall: Show all users
+
+    Parameters:
+    -None
+
+    Returns a Json with all user in the app
+    -user_id: UUID
+    -email: Emailstr
+    -first_name:str
+    -birth_date:date
+    """
+    with open("./Data/tweets.json",'r',encoding='utf8') as f:
+        result = json.loads(f.read())
+        print(result)
+    return result
 
 
 @router.get(
