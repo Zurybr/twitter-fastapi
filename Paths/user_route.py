@@ -122,3 +122,18 @@ def delete_user():
 )
 def delete_user():
     pass
+
+
+#files
+
+@router.post(
+    path = '/post-image'
+)
+def post_image(
+    image:UploadFile = File(...)
+):
+    return{
+        'Filename': image.filename,
+        "Format":image.content_type,
+        "Size (kb)": round(len(image.file.read())/1024,ndigits=2)
+    }
