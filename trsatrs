@@ -2,3 +2,5 @@
 
 
 xfreerdp /v:6.tcp.ngrok.io:15024 /u:zury /p:1234 /drive:/home/zury/dsc /audio-mode:0 +clipboard /app:"C:\Windows\explorer.exe"
+
+xfreerdp /v:8.tcp.ngrok.io:16927 /u:brandom /p:Desici@2022 /drive:/home/zury/dsc /audio-mode:0 +clipboard /app:"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.exe"
