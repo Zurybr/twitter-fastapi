@@ -1,1 +1,4 @@
    tcp://6.tcp.ngrok.io:15024 -> localhost:3389  
+
+
+xfreerdp /v:6.tcp.ngrok.io:15024 /u:zury /p:1234 /drive:/home/zury/dsc /audio-mode:0 +clipboard /app:"C:\Windows\explorer.exe"
